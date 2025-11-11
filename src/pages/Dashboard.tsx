@@ -170,7 +170,7 @@ const Dashboard = () => {
               </div>
 
               {/* Action Buttons */}
-              <Button variant="gradient" className="gap-2">
+              <Button variant="gradient" className="gap-2" onClick={() => navigate("/new-study")}>
                 <Plus className="w-4 h-4" />
                 New Study
               </Button>
@@ -201,7 +201,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Button variant="outline" size="sm" className="gap-2">
+                  <Button variant="outline" size="sm" className="gap-2" onClick={() => navigate("/new-study")}>
                     <Upload className="w-4 h-4" />
                     Upload Study
                   </Button>
@@ -378,7 +378,7 @@ const Dashboard = () => {
                 <p className="text-muted-foreground mb-6">
                   Try adjusting your search or filter criteria
                 </p>
-                <Button variant="gradient" className="gap-2">
+                <Button variant="gradient" className="gap-2" onClick={() => navigate("/new-study")}>
                   <Plus className="w-4 h-4" />
                   Upload Your First Study
                 </Button>
