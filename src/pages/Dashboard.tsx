@@ -119,7 +119,6 @@ const Dashboard = () => {
     { label: "Total Studies", value: studies.length.toString(), icon: FileText, trend: "+12% this week" },
     { label: "Completed Today", value: completedToday.toString(), icon: CheckCircle2, trend: "On track" },
     { label: "Processing", value: processingCount.toString(), icon: Clock, isAnimated: true },
-    { label: "Success Rate", value: successRate + "%", icon: TrendingUp, trend: "+5% vs last month" },
   ];
 
   const filteredStudies = studies.filter((study) => {
@@ -223,7 +222,7 @@ const Dashboard = () => {
           )}
 
           {/* Statistics Cards */}
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-3 gap-6">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
