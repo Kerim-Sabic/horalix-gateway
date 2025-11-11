@@ -9,9 +9,13 @@ import {
   CheckCircle2, 
   FileText,
   X,
+  TrendingUp,
   Eye,
   Edit,
   Trash2,
+  Upload,
+  BarChart3,
+  Heart,
   User
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -43,6 +47,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
+  const [showWelcome, setShowWelcome] = useState(true);
 
   const doctorName = "doctor1";
   const doctorTitle = "Dr. " + doctorName;
@@ -178,6 +183,44 @@ const Dashboard = () => {
       </header>
 
       <div className="container mx-auto px-8 py-8 space-y-8">
+          {/* Welcome Banner */}
+          {showWelcome && (
+            <div className="glass-card p-6 animate-fade-in">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full gradient-brand flex items-center justify-center">
+                    <Heart className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-semibold text-foreground">
+                      Welcome back, {doctorTitle} 👋
+                    </h2>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      You have {processingCount} studies in progress and {completedToday} completed today
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Button variant="outline" size="sm" className="gap-2" onClick={() => navigate("/new-study")}>
+                    <Upload className="w-4 h-4" />
+                    Upload Study
+                  </Button>
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    <BarChart3 className="w-4 h-4" />
+                    View Analytics
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="icon"
+                    onClick={() => setShowWelcome(false)}
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Statistics Cards */}
           <div className="grid grid-cols-3 gap-6">
             {stats.map((stat, index) => {
