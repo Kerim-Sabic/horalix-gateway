@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Fingerprint } from "lucide-react";
@@ -6,6 +7,7 @@ import WindowControls from "@/components/WindowControls";
 import horalixLogo from "@/assets/horalix-logo.png";
 
 const Auth = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +18,7 @@ const Auth = () => {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
+      navigate("/dashboard");
     }, 1500);
   };
 
