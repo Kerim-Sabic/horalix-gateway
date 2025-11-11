@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Upload, FileText, X } from "lucide-react";
+import { ArrowLeft, Upload, FileText, Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
+import horalixLogo from "@/assets/horalix-logo.png";
 
 const NewStudy = () => {
   const navigate = useNavigate();
@@ -49,27 +50,28 @@ const NewStudy = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
       {/* Header Section */}
-      <header className="glass-card border-b border-border/50 px-12 py-8">
+      <header className="glass-card border-b border-border/50 px-8 py-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-6">
             <Button
               variant="ghost"
               onClick={() => navigate("/dashboard")}
-              className="gap-2 hover:scale-105 smooth-transition"
+              className="gap-2"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4" />
               Back
             </Button>
+            <img src={horalixLogo} alt="Horalix Pulse" className="h-12 w-12" />
             <div>
-              <h1 className="text-3xl font-bold text-gradient">New Study</h1>
-              <p className="text-sm text-muted-foreground mt-1">Upload and analyze echocardiogram</p>
+              <h1 className="text-2xl font-bold text-gradient">New Study</h1>
+              <p className="text-sm text-muted-foreground mt-0.5">Upload and analyze echocardiogram</p>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             {/* Doctor Info */}
-            <div className="glass-card px-6 py-4 flex items-center gap-3 animate-fade-in">
-              <Avatar className="h-11 w-11 gradient-brand">
+            <div className="glass-card px-5 py-3 flex items-center gap-3">
+              <Avatar className="h-10 w-10 gradient-brand">
                 <AvatarFallback className="bg-transparent text-white font-semibold">
                   {doctorName.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
@@ -83,13 +85,23 @@ const NewStudy = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-12 py-12">
-        <div className="max-w-5xl mx-auto">
-          <form onSubmit={handleSubmit} className="space-y-8">
+      <div className="container mx-auto px-8 py-8">
+        <div className="max-w-4xl mx-auto">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* File Upload Card */}
-            <div className="glass-card p-10 animate-fade-in">
-              <div className="space-y-6">
-                <div className="relative border-2 border-dashed border-border rounded-2xl p-16 text-center hover:border-primary/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] smooth-transition group">
+            <div className="glass-card p-8 space-y-6 animate-fade-in">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-xl gradient-brand flex items-center justify-center">
+                  <FileText className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-foreground">Upload DICOM Files</h2>
+                  <p className="text-sm text-muted-foreground">Patient information will be extracted from DICOM metadata</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="border-2 border-dashed border-border rounded-xl p-8 text-center hover:border-primary/50 smooth-transition">
                   <input
                     type="file"
                     id="fileUpload"
@@ -100,16 +112,16 @@ const NewStudy = () => {
                   />
                   <label
                     htmlFor="fileUpload"
-                    className="cursor-pointer flex flex-col items-center gap-6"
+                    className="cursor-pointer flex flex-col items-center gap-4"
                   >
-                    <div className="w-24 h-24 rounded-full gradient-brand/10 flex items-center justify-center group-hover:scale-110 smooth-transition">
-                      <Upload className="w-12 h-12 text-primary group-hover:scale-110 smooth-transition" />
+                    <div className="w-16 h-16 rounded-full gradient-brand/10 flex items-center justify-center">
+                      <Upload className="w-8 h-8 text-primary" />
                     </div>
                     <div>
-                      <p className="text-lg font-semibold text-foreground mb-2">
+                      <p className="text-sm font-medium text-foreground mb-1">
                         Click to upload or drag and drop
                       </p>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         DICOM files (.dcm, .dicom) - Max 500MB per file
                       </p>
                     </div>
@@ -118,24 +130,23 @@ const NewStudy = () => {
 
                 {/* Selected Files List */}
                 {selectedFiles.length > 0 && (
-                  <div className="space-y-4 animate-fade-in" style={{ animationDelay: "100ms" }}>
-                    <Label className="text-base font-semibold text-foreground">
+                  <div className="space-y-2">
+                    <Label className="text-sm font-medium text-foreground">
                       Selected Files ({selectedFiles.length})
                     </Label>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {selectedFiles.map((file, index) => (
                         <div
                           key={index}
-                          className="glass-card p-5 flex items-center justify-between group hover:bg-muted/30 hover:shadow-lg smooth-transition animate-fade-in"
-                          style={{ animationDelay: `${index * 50}ms` }}
+                          className="glass-card p-4 flex items-center justify-between group hover:bg-muted/30 smooth-transition"
                         >
-                          <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl gradient-brand/20 flex items-center justify-center group-hover:scale-105 smooth-transition">
-                              <FileText className="w-6 h-6 text-primary" />
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-lg gradient-brand/20 flex items-center justify-center">
+                              <FileText className="w-5 h-5 text-primary" />
                             </div>
                             <div>
-                              <p className="text-sm font-semibold text-foreground">{file.name}</p>
-                              <p className="text-xs text-muted-foreground mt-0.5">
+                              <p className="text-sm font-medium text-foreground">{file.name}</p>
+                              <p className="text-xs text-muted-foreground">
                                 {(file.size / 1024 / 1024).toFixed(2)} MB
                               </p>
                             </div>
@@ -145,9 +156,9 @@ const NewStudy = () => {
                             variant="ghost"
                             size="icon"
                             onClick={() => handleRemoveFile(index)}
-                            className="opacity-50 group-hover:opacity-100 smooth-transition hover:bg-destructive/10 hover:text-destructive hover:scale-110"
+                            className="opacity-0 group-hover:opacity-100 smooth-transition hover:bg-destructive/10 hover:text-destructive"
                           >
-                            <X className="w-5 h-5" />
+                            <X className="w-4 h-4" />
                           </Button>
                         </div>
                       ))}
@@ -158,21 +169,21 @@ const NewStudy = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center justify-end gap-4 animate-fade-in" style={{ animationDelay: "200ms" }}>
+            <div className="flex items-center justify-end gap-4 animate-fade-in" style={{ animationDelay: "100ms" }}>
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => navigate("/dashboard")}
-                className="gap-2 h-12 px-8 hover:scale-105 smooth-transition"
+                className="gap-2"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 variant="gradient"
-                className="gap-2 h-12 px-8 shadow-lg hover:shadow-xl hover:scale-105"
+                className="gap-2"
               >
-                <Upload className="w-5 h-5" />
+                <Upload className="w-4 h-4" />
                 Upload Study
               </Button>
             </div>
