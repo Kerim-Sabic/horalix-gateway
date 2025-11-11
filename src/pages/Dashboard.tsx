@@ -8,8 +8,6 @@ import {
   Clock, 
   CheckCircle2, 
   FileText,
-  Minus,
-  Square,
   X,
   TrendingUp,
   Eye,
@@ -148,30 +146,8 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
       {/* Header Section */}
-      <header className="glass-card border-b border-border/50 px-8 py-6 relative">
-        {/* Window Controls */}
-        <div className="absolute top-4 right-4 flex items-center gap-1">
-          <button
-            className="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-muted/50 fast-transition group"
-            aria-label="Minimize"
-          >
-            <Minus className="w-4 h-4 text-muted-foreground group-hover:text-foreground fast-transition" />
-          </button>
-          <button
-            className="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-muted/50 fast-transition group"
-            aria-label="Maximize"
-          >
-            <Square className="w-4 h-4 text-muted-foreground group-hover:text-foreground fast-transition" />
-          </button>
-          <button
-            className="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-destructive/10 fast-transition group"
-            aria-label="Close"
-          >
-            <X className="w-4 h-4 text-muted-foreground group-hover:text-destructive fast-transition" />
-          </button>
-        </div>
-
-        <div className="flex items-center justify-between pr-36">
+      <header className="glass-card border-b border-border/50 px-8 py-6">
+        <div className="flex items-center justify-between">
             <div className="flex items-center gap-6">
               <img src={horalixLogo} alt="Horalix Pulse" className="h-12 w-12" />
               <div>
