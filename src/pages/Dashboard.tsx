@@ -147,41 +147,31 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
-      {/* Desktop App Title Bar */}
-      <div className="fixed top-0 left-0 right-0 h-10 glass-card border-b border-border/50 flex items-center justify-between px-4 z-50">
-        <div className="flex items-center gap-2">
-          <img src={horalixLogo} alt="Horalix" className="h-5 w-5" />
-          <span className="text-sm font-semibold text-foreground">Horalix Pulse</span>
-        </div>
-        
+      {/* Header Section */}
+      <header className="glass-card border-b border-border/50 px-8 py-6 relative">
         {/* Window Controls */}
-        <div className="flex items-center gap-1">
+        <div className="absolute top-4 right-4 flex items-center gap-1">
           <button
-            className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-muted/50 fast-transition group"
+            className="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-muted/50 fast-transition group"
             aria-label="Minimize"
           >
-            <Minus className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground fast-transition" />
+            <Minus className="w-4 h-4 text-muted-foreground group-hover:text-foreground fast-transition" />
           </button>
           <button
-            className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-muted/50 fast-transition group"
+            className="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-muted/50 fast-transition group"
             aria-label="Maximize"
           >
-            <Square className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground fast-transition" />
+            <Square className="w-4 h-4 text-muted-foreground group-hover:text-foreground fast-transition" />
           </button>
           <button
-            className="w-8 h-8 rounded-md flex items-center justify-center hover:bg-destructive/10 fast-transition group"
+            className="w-9 h-9 rounded-lg flex items-center justify-center hover:bg-destructive/10 fast-transition group"
             aria-label="Close"
           >
-            <X className="w-3.5 h-3.5 text-muted-foreground group-hover:text-destructive fast-transition" />
+            <X className="w-4 h-4 text-muted-foreground group-hover:text-destructive fast-transition" />
           </button>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="pt-10">
-        {/* Header Section */}
-        <header className="glass-card border-b border-border/50 px-8 py-6">
-          <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between pr-36">
             <div className="flex items-center gap-6">
               <img src={horalixLogo} alt="Horalix Pulse" className="h-12 w-12" />
               <div>
@@ -215,9 +205,9 @@ const Dashboard = () => {
               </Button>
             </div>
           </div>
-        </header>
+      </header>
 
-        <div className="container mx-auto px-8 py-8 space-y-8">
+      <div className="container mx-auto px-8 py-8 space-y-8">
           {/* Welcome Banner */}
           {showWelcome && (
             <div className="glass-card p-6 animate-fade-in">
@@ -421,7 +411,6 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-      </div>
     </div>
   );
 };
