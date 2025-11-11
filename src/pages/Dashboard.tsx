@@ -52,15 +52,15 @@ const Dashboard = () => {
 
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
-        <header className="px-8 py-6 border-b border-border/50">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+        <header className="px-8 py-6 border-b border-border/50 pr-48">
+          <div className="flex items-center justify-between gap-8">
+            <div className="flex items-center gap-4 min-w-0">
               <img 
                 src={horalixLogo} 
                 alt="Horalix Pulse Logo" 
-                className="h-12 w-auto"
+                className="h-12 w-auto flex-shrink-0"
               />
-              <div>
+              <div className="min-w-0">
                 <h1 className="text-2xl font-semibold tracking-tight text-foreground">
                   Patient Studies
                 </h1>
@@ -70,8 +70,8 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="text-right">
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <div className="glass-card px-4 py-2 rounded-lg">
                 <p className="text-sm font-semibold text-foreground">doctor1</p>
                 <p className="text-xs text-muted-foreground">doctor</p>
               </div>
@@ -95,40 +95,42 @@ const Dashboard = () => {
         {/* Main Content */}
         <main className="flex-1 px-8 py-8 max-w-7xl mx-auto w-full animate-fade-in">
           {/* Search and Filters */}
-          <div className="mb-8 space-y-6">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <Input
-                type="text"
-                placeholder="Search by Patient ID or Study UID..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12"
-              />
+          <div className="mb-8 space-y-4">
+            <div className="glass-card rounded-xl p-1">
+              <div className="relative">
+                <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+                <Input
+                  type="text"
+                  placeholder="Search by Patient ID or Study UID..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-14 border-0 bg-transparent text-base h-14"
+                />
+              </div>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <Button
-                variant={activeFilter === "all" ? "default" : "outline"}
+                variant={activeFilter === "all" ? "default" : "ghost"}
                 size="default"
                 onClick={() => setActiveFilter("all")}
-                className={activeFilter === "all" ? "bg-accent hover:bg-accent/90" : ""}
+                className={activeFilter === "all" ? "bg-accent hover:bg-accent/90 text-accent-foreground" : ""}
               >
                 All
               </Button>
               <Button
-                variant={activeFilter === "completed" ? "default" : "outline"}
+                variant={activeFilter === "completed" ? "default" : "ghost"}
                 size="default"
                 onClick={() => setActiveFilter("completed")}
-                className={activeFilter === "completed" ? "bg-accent hover:bg-accent/90" : ""}
+                className={activeFilter === "completed" ? "bg-accent hover:bg-accent/90 text-accent-foreground" : ""}
               >
                 Completed
               </Button>
               <Button
-                variant={activeFilter === "processing" ? "default" : "outline"}
+                variant={activeFilter === "processing" ? "default" : "ghost"}
                 size="default"
                 onClick={() => setActiveFilter("processing")}
-                className={activeFilter === "processing" ? "bg-accent hover:bg-accent/90" : ""}
+                className={activeFilter === "processing" ? "bg-accent hover:bg-accent/90 text-accent-foreground" : ""}
               >
                 Processing
               </Button>
@@ -137,39 +139,63 @@ const Dashboard = () => {
 
           {/* Studies List */}
           <div className="space-y-4">
-            {filteredStudies.map((study) => (
+            {filteredStudies.map((study, index) => (
               <div
                 key={study.id}
-                className="glass-card rounded-xl p-6 animate-slide-up hover:shadow-lg smooth-transition"
+                className="glass-card rounded-xl p-6 hover:shadow-xl smooth-transition group cursor-pointer"
+                style={{ animationDelay: `${index * 0.05}s` }}
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1 space-y-3">
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2 break-all">
-                        {study.patientId}
-                      </h3>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <User className="w-4 h-4 text-accent" />
-                        <span className="break-all">Study UID: {study.studyUid}</span>
+                <div className="flex items-start justify-between gap-6">
+                  <div className="flex-1 min-w-0 space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 rounded-lg bg-gradient-brand flex items-center justify-center flex-shrink-0">
+                            <User className="w-5 h-5 text-white" />
+                          </div>
+                          <Badge 
+                            className="bg-accent/15 text-accent border-0 font-semibold text-xs px-3 py-1 hover:bg-accent/25 smooth-transition"
+                          >
+                            <span className="mr-1.5">✓</span> Completed
+                          </Badge>
+                        </div>
+                        <h3 className="text-base font-semibold text-foreground mb-2 break-all font-mono">
+                          {study.patientId}
+                        </h3>
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground mt-2">
-                        <Calendar className="w-4 h-4 text-accent" />
-                        <span>{study.date}</span>
+                    </div>
+                    
+                    <div className="space-y-2 pl-1">
+                      <div className="flex items-center gap-3 text-sm">
+                        <div className="flex items-center gap-2 text-muted-foreground min-w-0">
+                          <User className="w-4 h-4 text-primary flex-shrink-0" />
+                          <span className="font-medium text-xs">Study UID:</span>
+                        </div>
+                        <span className="text-foreground font-mono text-xs break-all">{study.studyUid}</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-sm">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
+                          <span className="font-medium text-xs">Date:</span>
+                        </div>
+                        <span className="text-foreground font-medium text-xs">{study.date}</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 ml-4">
-                    <Badge 
-                      variant="outline" 
-                      className="bg-accent/10 text-accent border-accent/30 font-medium"
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <Button 
+                      variant="ghost" 
+                      size="default"
+                      className="hover:bg-primary/10 hover:text-primary smooth-transition"
                     >
-                      ✓ Completed
-                    </Badge>
-                    <Button variant="ghost" size="default">
                       Edit
                     </Button>
-                    <Button variant="destructive" size="default">
+                    <Button 
+                      variant="ghost" 
+                      size="default"
+                      className="hover:bg-destructive/10 hover:text-destructive smooth-transition"
+                    >
                       Delete
                     </Button>
                   </div>
@@ -179,8 +205,12 @@ const Dashboard = () => {
           </div>
 
           {filteredStudies.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-muted-foreground text-lg">No studies found</p>
+            <div className="glass-card rounded-xl p-16 text-center animate-fade-in">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-muted/30 mb-4">
+                <Search className="w-8 h-8 text-muted-foreground" />
+              </div>
+              <p className="text-muted-foreground text-lg font-medium">No studies found</p>
+              <p className="text-muted-foreground text-sm mt-2">Try adjusting your search or filters</p>
             </div>
           )}
         </main>
