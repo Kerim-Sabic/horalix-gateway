@@ -13,23 +13,6 @@ export default {
       },
     },
     extend: {
-      spacing: {
-        '11': '2.75rem',  // 44px - iOS tap target
-        '13': '3.25rem',  // 52px - iOS large button
-        '18': '4.5rem',   // 72px - iOS nav bar
-      },
-      fontSize: {
-        'ios-caption': ['12px', { lineHeight: '16px', fontWeight: '400' }],
-        'ios-footnote': ['13px', { lineHeight: '18px', fontWeight: '400' }],
-        'ios-subhead': ['15px', { lineHeight: '20px', fontWeight: '400' }],
-        'ios-callout': ['16px', { lineHeight: '21px', fontWeight: '400' }],
-        'ios-body': ['17px', { lineHeight: '22px', fontWeight: '400' }],
-        'ios-headline': ['17px', { lineHeight: '22px', fontWeight: '600' }],
-        'ios-title3': ['20px', { lineHeight: '25px', fontWeight: '600' }],
-        'ios-title2': ['22px', { lineHeight: '28px', fontWeight: '600' }],
-        'ios-title1': ['28px', { lineHeight: '34px', fontWeight: '700' }],
-        'ios-large-title': ['34px', { lineHeight: '41px', fontWeight: '700' }],
-      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -124,20 +107,6 @@ export default {
           "50%": {
             opacity: "0.5"
           }
-        },
-        "spring-in": {
-          "0%": { transform: "scale(0.95)", opacity: "0" },
-          "50%": { transform: "scale(1.02)" },
-          "100%": { transform: "scale(1)", opacity: "1" }
-        },
-        "lift": {
-          "0%": { transform: "translateY(0)", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" },
-          "100%": { transform: "translateY(-2px)", boxShadow: "0 8px 16px rgba(0,0,0,0.1)" }
-        },
-        "press": {
-          "0%": { transform: "scale(1)" },
-          "50%": { transform: "scale(0.98)" },
-          "100%": { transform: "scale(1)" }
         }
       },
       animation: {
@@ -146,9 +115,6 @@ export default {
         "fade-in": "fade-in 0.5s ease-out",
         "slide-up": "slide-up 0.6s ease-out",
         "glow": "glow 2s ease-in-out infinite",
-        "spring-in": "spring-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-        "lift": "lift 0.2s ease-out forwards",
-        "press": "press 0.1s ease-out",
       },
     },
   },
